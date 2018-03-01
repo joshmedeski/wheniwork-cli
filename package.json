@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^2.14.1"
+  },
+  "bin": {
+    "dayjob": "./index.js"
   }
 }
