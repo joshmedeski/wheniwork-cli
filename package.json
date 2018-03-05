@@ -14,6 +14,6 @@
     "date-fns": "^1.29.0"
   },
   "bin": {
-    "dayjob": "./index.js"
+    "wheniwork": "./index.js"
   }
 }
