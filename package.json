@@ -1,7 +1,7 @@
 {
-  "name": "day-job-cli",
+  "name": "wheniwork-cli",
   "version": "1.0.0",
-  "description": "A command-line-tool for displaying scheduling information about your day job.",
+  "description": "A command-line-tool for displaying my information for the week.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

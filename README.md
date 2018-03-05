@@ -1,3 +1,3 @@
-# Day Job
+# When I Work
 
-A command-line-tool for displaying scheduling information about your day job.
+A command-line-tool for displaying my information for the week.
