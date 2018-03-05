@@ -5,7 +5,9 @@ const program = require('commander');
 const format = require('date-fns/format');
 const differenceInHours = require('date-fns/difference_in_hours');
 const addHours = require('date-fns/add_hours');
+
 const Table = require('cli-table');
+const chalk = require('chalk');
 
 program
   .name('Day Job')
@@ -16,11 +18,19 @@ program
   .parse(process.argv)
 
 let whenIWorkTable = new Table({
-  head: ['Date', 'Worked', 'Pace']
+  head: [
+    chalk.reset.bold('Date'),
+    chalk.reset.bold('Worked'),
+    chalk.reset.bold('Pace'),
+  ]
 });
 
-whenIWorkTable.push(['Mon, Mar 5', '6.8 (-1.2)', '6.8/8 (-1.2)']);
-whenIWorkTable.push(['Tue, Mar 6', '7.5 (-0.5)', '14.3/16 (-1.7)']);
+whenIWorkTable.push([
+  // chalk.italic('Mon, Mar 5'),
+  chalk.italic('Mon, Mar 5'),
+  '6.8hrs (' + chalk.italic.red('-1.2') + ')',
+  '6.8/8 (' + chalk.italic.green('+1.9') + ')'
+]);
 
 console.log(whenIWorkTable.toString());
 
