@@ -5,6 +5,7 @@ const program = require('commander');
 const format = require('date-fns/format');
 const differenceInHours = require('date-fns/difference_in_hours');
 const addHours = require('date-fns/add_hours');
+const Table = require('cli-table');
 
 program
   .name('Day Job')
@@ -14,7 +15,14 @@ program
   .option('-c, --clocked-in <clockedIn>', 'when you clocked in today')
   .parse(process.argv)
 
-// console.log('today: %s this week: %s', program.today, program.week);
+let whenIWorkTable = new Table({
+  head: ['Date', 'Worked', 'Pace']
+});
+
+whenIWorkTable.push(['Mon, Mar 5', 6.8, '6.8/8 (-1.2)']);
+
+console.log(whenIWorkTable.toString());
+
 
 if (program.clockedIn) {
   console.log(genWorkLeftMsg(program.clockedIn));
