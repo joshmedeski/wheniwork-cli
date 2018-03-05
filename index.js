@@ -19,7 +19,8 @@ let whenIWorkTable = new Table({
   head: ['Date', 'Worked', 'Pace']
 });
 
-whenIWorkTable.push(['Mon, Mar 5', 6.8, '6.8/8 (-1.2)']);
+whenIWorkTable.push(['Mon, Mar 5', '6.8 (-1.2)', '6.8/8 (-1.2)']);
+whenIWorkTable.push(['Tue, Mar 6', '7.5 (-0.5)', '14.3/16 (-1.7)']);
 
 console.log(whenIWorkTable.toString());
 
