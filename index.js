@@ -22,6 +22,7 @@ let whenIWorkTable = new Table({
     chalk.reset.bold('Date'),
     chalk.reset.bold('Worked'),
     chalk.reset.bold('Pace'),
+    chalk.reset.bold('Started'),
   ]
 });
 
@@ -29,7 +30,8 @@ whenIWorkTable.push([
   // chalk.italic('Mon, Mar 5'),
   chalk.italic('Mon, Mar 5'),
   '6.8hrs (' + chalk.italic.red('-1.2') + ')',
-  '6.8/8 (' + chalk.italic.green('+1.9') + ')'
+  '6.8/8 (' + chalk.italic.green('+1.9') + ')',
+  chalk.yellow('9:13am')
 ]);
 
 console.log(whenIWorkTable.toString());
