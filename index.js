@@ -26,13 +26,6 @@ let whenIWorkTable = new Table({
   head: ['Date', 'Worked'].map(i => chalk.reset.bold(i))
 });
 
-// whenIWorkTable.push([
-//   'Mon, Mar 5',
-//   '6.8hrs (' + chalk.red('-1.2') + ')',
-//   '6.8/8 (' + chalk.green('+1.9') + ')',
-//   '9:13am'
-// ]);
-
 let totalHours = 0;
 let paceHours = 0;
 
