@@ -41,7 +41,7 @@ for (let day = 0; day <= 4; day++) {
     totalHours += hours[day];
     whenIWorkTable.push([
       formattedDate,
-      `${hours[day]}hrs (${difference(hours[day], paceHours)})`,
+      `${hours[day]}hrs (${difference(hours[day], 8)})`,
     ]);
   }
 }
