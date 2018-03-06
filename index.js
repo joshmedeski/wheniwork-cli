@@ -12,7 +12,7 @@ const Table = require('cli-table');
 const chalk = require('chalk');
 
 program
-  .name('Day Job')
+  .name('When I Work')
   .version('1.0.0')
   .parse(process.argv)
 
