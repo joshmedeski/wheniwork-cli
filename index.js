@@ -1,5 +1,7 @@
 #!/usr/bin/env node --harmony
 
+const hours = [ 7.65, 7.65, 7.65, 7.65 ];
+
 const program = require('commander');
 
 const format = require('date-fns/format');
@@ -12,30 +14,82 @@ const chalk = require('chalk');
 program
   .name('Day Job')
   .version('1.0.0')
-  .option('-w, --week <week>', 'the amount of hours you\'ve worked this week (previous to today)')
-  .option('-t, --today <today>', 'the amount of hours you\'ve worked today')
-  .option('-c, --clocked-in <clockedIn>', 'when you clocked in today')
   .parse(process.argv)
 
+const today = new Date();
+const monday = today.getDate() - today.getDay();
+let week = [];
+
+const stringDate = week.map(weekDay => format(weekDay, 'ddd, MMM D'));
+
 let whenIWorkTable = new Table({
-  head: [
-    chalk.reset.bold('Date'),
-    chalk.reset.bold('Worked'),
-    chalk.reset.bold('Pace'),
-    chalk.reset.bold('Started'),
-  ]
+  head: ['Date', 'Worked'].map(i => chalk.reset.bold(i))
 });
 
+// whenIWorkTable.push([
+//   'Mon, Mar 5',
+//   '6.8hrs (' + chalk.red('-1.2') + ')',
+//   '6.8/8 (' + chalk.green('+1.9') + ')',
+//   '9:13am'
+// ]);
+
+let totalHours = 0;
+let paceHours = 0;
+
+for (let day = 0; day <= 4; day++) {
+  let dayDate = new Date(today.setDate((day + 1) + monday));
+  let formattedDate = format(dayDate, 'ddd, MMM D');
+  if (isFutureDate(dayDate)) {
+    whenIWorkTable.push(
+      [formattedDate, '-'].map(i => chalk.gray(i))
+    );
+  } else {
+    paceHours += 8;
+    totalHours += hours[day];
+    whenIWorkTable.push([
+      formattedDate,
+      `${hours[day]}hrs (${difference(hours[day], paceHours)})`,
+    ]);
+  }
+}
+
 whenIWorkTable.push([
-  // chalk.italic('Mon, Mar 5'),
-  chalk.italic('Mon, Mar 5'),
-  '6.8hrs (' + chalk.italic.red('-1.2') + ')',
-  '6.8/8 (' + chalk.italic.green('+1.9') + ')',
-  chalk.yellow('9:13am')
+  'Total',
+  `${totalHours}/${paceHours} (${difference(totalHours, paceHours)})`
 ]);
 
 console.log(whenIWorkTable.toString());
 
+function isFutureDate(date) {
+  return date > new Date();
+}
+
+function currentTotalHours(hours) {
+  return hours.reduce((accumulator, currentValue) => {
+    accumulator + currentValue
+  });
+}
+
+function difference(hours, comparison) {
+  let difference = (hours - comparison).toFixed(2);
+  switch(true) {
+    case (difference > 0):
+      difference = chalk.green(difference);
+      break;
+    case (difference == 0):
+      difference = chalk.yellow(0);
+      break;
+    case (difference < 0):
+      difference = chalk.red(difference);
+    default:
+      difference;
+}
+  return difference;
+}
+
+function dayPace(day) {
+  return 8 + (8 * day);
+}
 
 if (program.clockedIn) {
   console.log(genWorkLeftMsg(program.clockedIn));
