@@ -26,6 +26,22 @@ class WhenIWork {
   isFutureDate(date) {
     return date > new Date();
   }
+
+  /**
+   * Converts a simple time string to JavaScript date.
+   *
+   * @param {string} time A simple time layout.
+   * @returns {Date} A converted date.
+   */
+  convertTimeToDate(time) {
+    const splitTime = time.split('').filter(i => !isNaN(i));
+    if (splitTime.length === 3) splitTime.unshift('0');
+    const hour = Number(`${splitTime[0]}${splitTime[1]}`);
+    const minutes = Number(`${splitTime[2]}${splitTime[3]}`);
+    let date = new Date();
+    date.setHours(hour, minutes)
+    return date;
+  }
 }
 
 module.exports = new WhenIWork();
@@ -35,15 +51,12 @@ const whenIWork = new WhenIWork();
 const today = new Date();
 const monday = today.getDate() - today.getDay();
 let week = [];
-
-const stringDate = week.map(weekDay => format(weekDay, 'ddd, MMM D'));
+let totalHours = 0;
+let paceHours = 0;
 
 let whenIWorkTable = new Table({
   head: ['Date', 'Worked'].map(i => chalk.reset.bold(i))
 });
-
-let totalHours = 0;
-let paceHours = 0;
 
 for (let day = 0; day <= 4; day++) {
   let dayDate = new Date(today.setDate((day + 1) + monday));
@@ -69,12 +82,6 @@ whenIWorkTable.push([
 
 console.log(whenIWorkTable.toString());
 
-function currentTotalHours(hours) {
-  return hours.reduce((accumulator, currentValue) => {
-    accumulator + currentValue
-  });
-}
-
 function difference(hours, comparison) {
   let difference = (hours - comparison).toFixed(2);
   switch(true) {
@@ -94,16 +101,6 @@ function difference(hours, comparison) {
 
 if (program.clockedIn) {
   console.log(genWorkLeftMsg(program.clockedIn));
-}
-
-function convertTimeToDate(time) {
-  const splitTime = time.split('').filter(i => !isNaN(i));
-  if (splitTime.length === 3) splitTime.unshift('0');
-  const hour = Number(`${splitTime[0]}${splitTime[1]}`);
-  const minutes = Number(`${splitTime[2]}${splitTime[3]}`);
-  let date = new Date();
-  date.setHours(hour, minutes)
-  return date;
 }
 
 function calcHoursWorked(clockedIn) {

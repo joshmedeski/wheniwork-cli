@@ -13,3 +13,19 @@ describe('futureDate()', () => {
     });
   });
 });
+
+describe('convertTimeToDate()', () => {
+  using({
+    'midnight to date': ['12:00am', 12, 0],
+    'evening time to date': ['8:20pm', 8, 20]
+  }, (desc, input, expectedHour, expectedMinute) => {
+    test(desc, () => {
+      const convertedDate = whenIWork.convertTimeToDate(input)
+      const convertedHour = convertedDate.getHours();
+      const convertedMinutes = convertedDate.getMinutes();
+      expect(convertedHour).toBe(expectedHour);
+      expect(convertedMinutes).toBe(expectedMinute);
+    });
+  });
+});
+
