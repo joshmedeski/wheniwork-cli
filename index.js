@@ -16,6 +16,22 @@ program
   .version('1.0.0')
   .parse(process.argv)
 
+class WhenIWork {
+  /**
+   * Determines if a given date is in the future.
+   *
+   * @param {Date} date The date to determine if is in the future.
+   * @returns {boolean} true if the given date is in the future.
+   */
+  isFutureDate(date) {
+    return date > new Date();
+  }
+}
+
+module.exports = new WhenIWork();
+
+const whenIWork = new WhenIWork();
+
 const today = new Date();
 const monday = today.getDate() - today.getDay();
 let week = [];
@@ -32,7 +48,7 @@ let paceHours = 0;
 for (let day = 0; day <= 4; day++) {
   let dayDate = new Date(today.setDate((day + 1) + monday));
   let formattedDate = format(dayDate, 'ddd, MMM D');
-  if (isFutureDate(dayDate)) {
+  if (whenIWork.isFutureDate(dayDate)) {
     whenIWorkTable.push(
       [formattedDate, '-'].map(i => chalk.gray(i))
     );
@@ -52,10 +68,6 @@ whenIWorkTable.push([
 ]);
 
 console.log(whenIWorkTable.toString());
-
-function isFutureDate(date) {
-  return date > new Date();
-}
 
 function currentTotalHours(hours) {
   return hours.reduce((accumulator, currentValue) => {
@@ -78,10 +90,6 @@ function difference(hours, comparison) {
       difference;
 }
   return difference;
-}
-
-function dayPace(day) {
-  return 8 + (8 * day);
 }
 
 if (program.clockedIn) {
