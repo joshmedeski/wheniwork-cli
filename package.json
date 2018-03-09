@@ -2,9 +2,10 @@
   "name": "wheniwork-cli",
   "version": "1.0.0",
   "description": "A command-line-tool for displaying my information for the week.",
-  "main": "index.js",
+  "main": "./src/cli.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc -w"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +16,13 @@
     "date-fns": "^1.29.0"
   },
   "bin": {
-    "wheniwork": "./index.js"
+    "wheniwork": "./dist/cli.js"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.2.0",
+    "@types/node": "^9.4.7",
+    "prettier": "^1.11.1",
+    "ts-jest": "^22.4.1",
+    "typescript": "^2.7.2"
   }
 }
