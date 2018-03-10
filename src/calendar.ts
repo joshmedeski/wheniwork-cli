@@ -38,8 +38,6 @@ export class Calendar {
     this.pace.push(this.buildPaceRow("Minimum", this.minimumPaceHours));
     this.pace.push(this.buildPaceRow("Standard", this.standardPaceHours));
     this.pace.push(this.buildPaceRow("Overtime", this.overtimePaceHours));
-
-    console.log(this.week);
   }
 
   buildPaceRow(title: string, paceHours: number): any[] {

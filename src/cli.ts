@@ -13,18 +13,19 @@ declare global {
 }
 
 if (!Array.prototype.chalkGray) {
-  Array.prototype.chalkGray = function(): string[] {
+  Array.prototype.chalkGray = function (): string[] {
     return this.map(i => chalk.gray(i));
   };
 }
 
 if (!Array.prototype.chalkResetBold) {
-  Array.prototype.chalkResetBold = function(): string[] {
+  Array.prototype.chalkResetBold = function (): string[] {
     return this.map(i => chalk.reset.bold(i));
   };
 }
 
 const whenIWork = new WhenIWork();
+const timeSheet = [];
 
 program
   .name("When I Work")

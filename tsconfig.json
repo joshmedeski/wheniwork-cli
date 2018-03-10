@@ -1,16 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
     "outDir": "./dist",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "lib": ["es2017"]
+    "lib": [
+      "es2018",
+      "dom"
+    ]
   },
-  "typeRoots": ["node_modules/@types"],
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "typeRoots": [
+    "node_modules/@types"
+  ],
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
