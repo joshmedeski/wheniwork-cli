@@ -14,7 +14,9 @@
     "cli-table": "^0.3.1",
     "commander": "^2.14.1",
     "date-fns": "^1.29.0",
-    "node-fetch": "^2.1.1"
+    "dotenv": "^5.0.1",
+    "node-fetch": "^2.1.1",
+    "npm": "^5.7.1"
   },
   "bin": {
     "wheniwork": "./dist/cli.js"
