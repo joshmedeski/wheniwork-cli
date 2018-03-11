@@ -7,6 +7,7 @@ import * as Table from "cli-table";
 import chalk from "chalk";
 import { TimeSheet } from "./timesheet";
 import { Api } from "./api";
+import { Pace } from "./pace";
 
 const api = new Api();
 
@@ -34,6 +35,7 @@ api
   .then(response => {
     api.getUserTimes().then(times => {
       const timeSheet = new TimeSheet(times);
+      const pace = new Pace(times);
     });
   });
 
