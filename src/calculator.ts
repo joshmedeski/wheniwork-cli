@@ -1,7 +1,7 @@
 import { format, differenceInHours, addHours } from "date-fns";
 import chalk from "chalk";
 
-export class Calculator {
+class Calculator {
   constructor() {}
 
   calcHoursWorked(clockedIn: string): number {
@@ -64,3 +64,5 @@ export class Calculator {
     return differenceOut;
   }
 }
+
+export default Calculator;

@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Calculator } from "./calculator";
+import Calculator from "./calculator";
 
 export class Calendar {
   private calc: Calculator = new Calculator();

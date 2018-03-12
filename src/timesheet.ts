@@ -12,17 +12,16 @@ export class TimeSheet {
     times.reverse();
 
     times.forEach(time => {
+      const endTime = time.end_time ? format(time.end_time, "hh:mma") : "-";
       this.table.push(
         new Array(
           format(time.start_time, "ddd, MMM D"),
           format(time.start_time, "hh:mma"),
-          format(time.end_time, "hh:mma"),
-          time.length
+          endTime,
+          `${time.length.toFixed(2)}hrs`
         )
       );
     });
     console.log(this.table.toString());
   }
-
-  async getTimesheet() {}
 }

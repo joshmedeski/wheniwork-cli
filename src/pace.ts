@@ -1,5 +1,5 @@
 import { Calendar } from "./calendar";
-import { Calculator } from "./calculator";
+import Calculator from "./calculator";
 import * as Table from "cli-table";
 
 export class Pace {
@@ -13,7 +13,7 @@ export class Pace {
       head: ["Pace", "Hours"].chalkResetBold()
     });
 
-    this.lastWorkDay = new Date(times[0].start_time).getDate();
+    this.lastWorkDay = new Date(times[0].start_time).getDay();
     this.totalHours = times.reduce((accumulator, currentValue) => {
       const hours = currentValue.length || 0;
       return accumulator + hours;
