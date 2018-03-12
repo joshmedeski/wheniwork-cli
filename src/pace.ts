@@ -1,4 +1,3 @@
-import { Calendar } from "./calendar";
 import Calculator from "./calculator";
 import * as Table from "cli-table";
 
