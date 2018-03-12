@@ -7,7 +7,7 @@ A command-line-tool for displaying my information for the week.
 Install the package:
 
 ```bash
-$ npm install -g wheniwork-cli
+$ npm install -g wheniwork-cli # coming soon, not yet published to NPM
 ```
 
 Add `.wheniwork` to your home directory (`$HOME`) with the following credentials:
