@@ -43,9 +43,7 @@ export class Api {
       .then(response => response.json())
       .then(json => {
         let thisWeek = json.times.filter(this.isThisWeek);
-        thisWeek = thisWeek.map(time => {
-          return this.calcTodaysHours(time);
-        });
+        thisWeek = thisWeek.map(this.calcTodaysHours);
         return thisWeek;
       })
       .catch(error => {
