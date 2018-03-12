@@ -1,6 +1,5 @@
 #!/usr/bin/env node --harmony
 
-require("dotenv").config();
 
 import * as program from "commander";
 import * as Table from "cli-table";
@@ -8,6 +7,9 @@ import chalk from "chalk";
 import { TimeSheet } from "./timesheet";
 import { Api } from "./api";
 import { Pace } from "./pace";
+import * as os from "os";
+
+require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
 const api = new Api();
 
