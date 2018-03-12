@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { startOfWeek, differenceInMinutes } from "date-fns";
+import { startOfWeek, differenceInMinutes, addHours } from "date-fns";
 
 export class Api {
   url: string = "https://api.wheniwork.com/2";
@@ -44,6 +44,7 @@ export class Api {
       .then(json => {
         let thisWeek = json.times.filter(this.isThisWeek);
         thisWeek = thisWeek.map(this.calcTodaysHours);
+        thisWeek = thisWeek.map(this.estimateEndTime);
         return thisWeek;
       })
       .catch(error => {
@@ -62,6 +63,15 @@ export class Api {
     }
     time.length =
       differenceInMinutes(new Date(), new Date(time.start_time)) / 60;
+    return time;
+  }
+
+  estimateEndTime(time) {
+    if (time.end_time) {
+      return time;
+    }
+    const hoursToAdd = 8 - time.length;
+    time.end_time = addHours(new Date(), hoursToAdd);
     return time;
   }
 }

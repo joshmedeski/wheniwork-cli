@@ -1,5 +1,6 @@
 import * as Table from "cli-table";
 import { format } from "date-fns";
+import chalk from "chalk";
 
 export class TimeSheet {
   table: Table;
@@ -12,12 +13,16 @@ export class TimeSheet {
     times.reverse();
 
     times.forEach(time => {
-      const endTime = time.end_time ? format(time.end_time, "hh:mma") : "-";
+      let isFutureEndTime = time.end_time > new Date();
+      let formattedEndTime = format(time.end_time, "hh:mma");
+      if (isFutureEndTime) {
+        formattedEndTime = chalk.blue.italic(`${formattedEndTime}`);
+      }
       this.table.push(
         new Array(
           format(time.start_time, "ddd, MMM D"),
           format(time.start_time, "hh:mma"),
-          endTime,
+          formattedEndTime,
           `${time.length.toFixed(2)}hrs`
         )
       );
