@@ -1,5 +1,6 @@
 #!/usr/bin/env node --harmony
 
+// TODO: Publish to NPM
 
 import * as program from "commander";
 import * as Table from "cli-table";
@@ -12,6 +13,8 @@ import * as os from "os";
 require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
 const api = new Api();
+
+// TODO: Move array prototypes to separate file
 
 declare global {
   interface Array<T> {
@@ -32,11 +35,17 @@ if (!Array.prototype.chalkResetBold) {
   };
 }
 
+// TODO: Store the api token for future requests
+// TODO: Check if token is valid before
+// TODO: Check
+
 api
   .login(process.env.WHENIWORK_USERNAME, process.env.WHENIWORK_PASSWORD)
   .then(response => {
     api.getUserTimes().then(times => {
+      // TODO: Add flag for showing timesheets (-t)
       const timeSheet = new TimeSheet(times);
+      // TODO: Add flat for adding pace (-p)
       const pace = new Pace(times);
     });
   });
