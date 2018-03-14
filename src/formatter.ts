@@ -31,7 +31,7 @@ class Formatter {
     const h: number = Math.floor(hours);
     let m: string = String(((hours % 1) * 60).toFixed(0));
     if (m === "0") m = "00";
-    return `${h}:${m}`;
+    return `${h}:${m}hrs`;
   }
 }
 

@@ -10,18 +10,18 @@ export class Pace {
 
   constructor(week: Week) {
     this.table = new Table({
-      head: ["Pace", "Worked"].chalkResetBold()
+      head: ["Pace", "Hours", "Difference"].chalkResetBold()
     });
 
-    this.lastWorkDay = new Date(week.days[0].date).getDay();
+    this.lastWorkDay = new Date(week.days[week.days.length - 1].date).getDay();
     this.totalHours = week.days.reduce((accumulator, currentValue) => {
       const hours = currentValue.total.worked || 0;
       return accumulator + hours;
     }, 0);
 
-    this.row("Minimum (35)", 7);
-    this.row("Standard (40)", 8);
-    this.row("Overtime (45)", 9);
+    this.row("Minimum (35hrs)", 7);
+    this.row("Standard (40hrs)", 8);
+    this.row("Overtime (45hrs)", 9);
 
     console.log(this.table.toString());
   }
@@ -29,11 +29,8 @@ export class Pace {
   private row(title: string, pace: number) {
     this.table.push([
       title,
-      `${this.totalHours.toFixed(2)}/${pace *
-        this.lastWorkDay}hrs (${this.calc.difference(
-        this.totalHours,
-        pace * this.lastWorkDay
-      )})`
+      `${this.totalHours.toFixed(2)}/${pace * this.lastWorkDay}hrs`,
+      this.calc.difference(this.totalHours, pace * this.lastWorkDay)
     ]);
   }
 }

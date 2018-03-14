@@ -34,7 +34,7 @@ class Calculator {
     let differenceOut: string = "";
     switch (true) {
       case difference > 0:
-        differenceOut = chalk.green(String(difference));
+        differenceOut = chalk.green(String(`+${difference}`));
         break;
       case difference == 0:
         differenceOut = chalk.yellow(String(0));

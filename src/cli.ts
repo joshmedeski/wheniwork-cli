@@ -44,6 +44,7 @@ if (!Array.prototype.chalkResetBold) {
 api.week.then(week => {
   const timesheet = new TimeSheet(week);
   const hours = new Hours(week);
+  const pace = new Pace(week);
 });
 
 //   // TODO: Add flag for showing time sheets (-t)
