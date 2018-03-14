@@ -10,6 +10,7 @@ import { Api } from "./api";
 import { Pace } from "./pace";
 import * as os from "os";
 import Formatter from "./formatter";
+import Hours from "./hours";
 
 require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
@@ -42,6 +43,7 @@ if (!Array.prototype.chalkResetBold) {
 
 api.week.then(week => {
   const timesheet = new TimeSheet(week);
+  const hours = new Hours(week);
 });
 
 //   // TODO: Add flag for showing time sheets (-t)

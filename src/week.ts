@@ -27,9 +27,6 @@ class Week {
       dayIndex < 0 ? this.days.push(time) : this.mergeDays(dayIndex, time);
     });
 
-    // combine days that are the same
-    // 3. Set Total (worked and unpaidBreaks)
-
     // thisWeek = thisWeek.map(this.calcTodaysHours);
     // thisWeek = thisWeek.map(this.estimateEndTime);
   }
