@@ -1,5 +1,6 @@
 import Calculator from "./calculator";
 import * as Table from "cli-table";
+import Week from "./week";
 
 export class Pace {
   calc = new Calculator();
@@ -7,20 +8,20 @@ export class Pace {
   totalHours: number;
   lastWorkDay: number;
 
-  constructor(times: any[]) {
+  constructor(week: Week) {
     this.table = new Table({
-      head: ["Pace", "Hours"].chalkResetBold()
+      head: ["Pace", "Worked"].chalkResetBold()
     });
 
-    this.lastWorkDay = new Date(times[0].start_time).getDay();
-    this.totalHours = times.reduce((accumulator, currentValue) => {
-      const hours = currentValue.length || 0;
+    this.lastWorkDay = new Date(week.days[0].date).getDay();
+    this.totalHours = week.days.reduce((accumulator, currentValue) => {
+      const hours = currentValue.total.worked || 0;
       return accumulator + hours;
     }, 0);
 
-    this.row("Minimum", 7);
-    this.row("Standard", 8);
-    this.row("Overtime", 9);
+    this.row("Minimum (35)", 7);
+    this.row("Standard (40)", 8);
+    this.row("Overtime (45)", 9);
 
     console.log(this.table.toString());
   }

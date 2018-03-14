@@ -9,6 +9,7 @@ import { TimeSheet } from "./timesheet";
 import { Api } from "./api";
 import { Pace } from "./pace";
 import * as os from "os";
+import Formatter from "./formatter";
 
 require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
@@ -39,18 +40,18 @@ if (!Array.prototype.chalkResetBold) {
 // TODO: Check if token is valid before
 // TODO: Check
 
-api
-  .login(process.env.WHENIWORK_USERNAME, process.env.WHENIWORK_PASSWORD)
-  .then(response => {
-    api.getUserTimes().then(times => {
-      // TODO: Add flag for showing timesheets (-t)
-      const timeSheet = new TimeSheet(times);
-      // TODO: Add flat for adding pace (-p)
-      const pace = new Pace(times);
-    });
-  });
+api.week.then(week => {
+  const timesheet = new TimeSheet(week);
+});
+
+//   // TODO: Add flag for showing time sheets (-t)
+//   const timeSheet = new TimeSheet(times);
+//   // TODO: Add flat for adding pace (-p)
+//   const pace = new Pace(times);
 
 program
   .name("When I Work")
   .version("1.0.0")
   .parse(process.argv);
+
+const format = new Formatter();

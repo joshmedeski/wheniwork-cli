@@ -4,30 +4,13 @@ import chalk from "chalk";
 class Calculator {
   constructor() {}
 
-  calcHoursWorked(clockedIn: string): number {
-    const now = new Date();
-    const clockedInDate = this.convertTimeToDate(clockedIn);
-    return differenceInHours(now, clockedInDate);
-  }
-
-  calcWorkLeft(clockedIn): number {
-    const hoursWorked = this.calcHoursWorked(clockedIn);
-    return 8 - hoursWorked;
-  }
-
-  calcTimeToClockOut(clockedIn): string {
-    const dateToClockOut = addHours(new Date(), this.calcWorkLeft(clockedIn));
-    return format(dateToClockOut, "h:mma");
-  }
-
-  /**
-   * Determines if a given date is in the future.
-   *
-   * @param date The date to determine if is in the future.
-   * @returns true if the given date is in the future.
-   */
-  isFutureDate(date): boolean {
-    return date > new Date();
+  estimateEndTime(time) {
+    if (time.end_time) {
+      return time;
+    }
+    const hoursToAdd = 8 - time.length;
+    time.end_time = addHours(new Date(), hoursToAdd);
+    return time;
   }
 
   /**
