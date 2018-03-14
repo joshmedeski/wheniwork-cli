@@ -1,7 +1,9 @@
 import { format, differenceInHours, addHours } from "date-fns";
 import chalk from "chalk";
+import Formatter from "./formatter";
 
 class Calculator {
+  format = new Formatter();
   constructor() {}
 
   estimateEndTime(time) {
@@ -34,13 +36,13 @@ class Calculator {
     let differenceOut: string = "";
     switch (true) {
       case difference > 0:
-        differenceOut = chalk.green(String(`+${difference}`));
+        differenceOut = chalk.green(`+${this.format.hours(difference)}`);
         break;
       case difference == 0:
-        differenceOut = chalk.yellow(String(0));
+        differenceOut = chalk.yellow(this.format.hours(0));
         break;
       case difference < 0:
-        differenceOut = chalk.red(String(difference));
+        differenceOut = chalk.red(this.format.hours(difference));
       default:
         difference;
     }
