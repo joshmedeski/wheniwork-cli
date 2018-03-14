@@ -9,7 +9,7 @@ export class TimeSheet {
 
   constructor(week: Week) {
     this.table = new Table({
-      head: ["Day", "In", "Out", "Worked"].chalkResetBold()
+      head: ["Time Slot", "In", "Out", "Worked"].chalkResetBold()
     });
 
     week.days.reverse();
