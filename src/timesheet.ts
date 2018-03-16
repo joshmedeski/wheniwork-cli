@@ -19,7 +19,7 @@ export class TimeSheet {
         this.table.push([
           this.format.date(slot.clockIn),
           this.format.time(slot.clockIn),
-          this.format.time(slot.clockOut),
+          slot.clockOut ? this.format.time(slot.clockOut) : chalk.gray("-"),
           this.format.hours(slot.hours)
         ]);
       });
