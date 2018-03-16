@@ -15,7 +15,7 @@ export class Pace {
       head: ["Pace", "Hours", "Difference"].chalkResetBold()
     });
 
-    this.lastWorkDay = new Date(week.days[week.days.length - 1].date).getDay();
+    this.lastWorkDay = new Date(week.days[0].date).getDay();
     this.totalHours = week.days.reduce((accumulator, currentValue) => {
       const hours = currentValue.total.worked || 0;
       return accumulator + hours;

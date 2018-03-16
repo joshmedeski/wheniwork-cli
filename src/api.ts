@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import Week from "./week";
+import { startOfWeek, endOfWeek } from "date-fns";
 
 export interface WhenIWorkApiTime {
   account_id: number;
@@ -66,18 +67,22 @@ export class Api {
   // });
 
   get times(): Promise<WhenIWorkApiTime[]> {
+    const mon = startOfWeek(new Date());
+    const sat = endOfWeek(new Date());
     return this.login(
       process.env.WHENIWORK_USERNAME,
       process.env.WHENIWORK_PASSWORD
     ).then(() => {
-      const today = new Date();
-      return fetch(`${this.url}/times/user/${this.userID}`, {
-        headers: {
-          "content-type": "application/json",
-          "W-Token": this.token
-        },
-        method: "GET"
-      })
+      return fetch(
+        `${this.url}/times/?user_id=${this.userID}&start=${mon}&end=${sat}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            "W-Token": this.token
+          },
+          method: "GET"
+        }
+      )
         .then(response => response.json())
         .then(json => {
           const times = json.times;
