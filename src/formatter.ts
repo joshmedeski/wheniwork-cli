@@ -28,10 +28,12 @@ class Formatter {
    * @returns Hours in the time format (ex: '8:00')
    */
   hours(hours: number): string {
+    const isNegative = hours < 0 ? true : false;
     const h: number = Math.floor(hours);
     let m: string = String(((hours % 1) * 60).toFixed(0));
     if (m === "0") m = "00";
-    return `${h}:${m}hrs`;
+    if (Number(m) < 10 && Number(m) > 0) m = `${m}0`;
+    return `${h}:${m}`;
   }
 }
 

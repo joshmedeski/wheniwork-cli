@@ -1,4 +1,9 @@
-import { format, differenceInHours, addHours } from "date-fns";
+import {
+  format,
+  differenceInHours,
+  addHours,
+  differenceInMinutes
+} from "date-fns";
 import chalk from "chalk";
 import Formatter from "./formatter";
 
@@ -6,10 +11,12 @@ class Calculator {
   format = new Formatter();
   constructor() {}
 
+  workedSoFar(startTime: Date): number {
+    const minutesWorked = differenceInMinutes(new Date(), startTime);
+    return minutesWorked / 60;
+  }
+
   estimateEndTime(time) {
-    if (time.end_time) {
-      return time;
-    }
     const hoursToAdd = 8 - time.length;
     time.end_time = addHours(new Date(), hoursToAdd);
     return time;
@@ -42,7 +49,9 @@ class Calculator {
         differenceOut = chalk.yellow(this.format.hours(0));
         break;
       case difference < 0:
-        differenceOut = chalk.red(this.format.hours(difference));
+        differenceOut = chalk.red(
+          `-${this.format.hours(Math.abs(difference))}`
+        );
       default:
         difference;
     }
