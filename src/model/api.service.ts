@@ -7,8 +7,6 @@ import { Time } from "./wheniwork.types";
 export class ApiService {
   storage = new StorageService();
   url: string = "https://api.wheniwork.com/2";
-  token: string;
-  userID: string;
 
   constructor() {}
 
@@ -24,15 +22,15 @@ export class ApiService {
       },
       method: "POST"
     })
-      .then(response => response.json())
-      .then(response => {
-        this.token = response.token; // TODO: Save to dotfile
-        this.userID = response.user.id; // TODO: Save to dotfile
-        return response;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    .then(response => response.json())
+    .then(response => {
+      console.log("Save the following lines to your .wheniwork file:");
+      console.log(`WHENIWORK_USERID=${response.user.id}`);
+      console.log(`WHENIWORK_TOKEN=${response.token}`);
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
 
   // TODO: Write token and user id to wheniwork file
@@ -43,32 +41,30 @@ export class ApiService {
   // });
 
   times(userId: string, start: Date, end: Date): Promise<Time[]> {
-    return this.login(this.storage.username, this.storage.password).then(() => {
-      return fetch(
-        `${this.url}/times/?user_id=${userId}&start=${start}&end=${end}`,
-        {
-          headers: {
-            "content-type": "application/json",
-            "W-Token": this.token
-          },
-          method: "GET"
-        }
-      )
-        .then(response => response.json())
-        .then(json => {
-          const times = json.times;
-          return times;
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    return fetch(
+      `${this.url}/times/?user_id=${userId}&start=${start}&end=${end}`,
+      {
+        headers: {
+          "content-type": "application/json",
+          "W-Token": this.storage.token;
+        },
+        method: "GET"
+      }
+    )
+    .then(response => response.json())
+    .then(json => {
+      return json.times;
+    })
+    .catch(error => {
+      console.error(error);
     });
   }
 
+  // TODO: Move getting this week to controller
   get week(): Promise<Week> {
     const mon = startOfWeek(new Date());
     const sat = endOfWeek(new Date());
-    return this.times(this.userID, mon, sat).then(times => {
+    return this.times(this.storage.userId, mon, sat).then(times => {
       const newWeek = new Week(times);
       return newWeek;
     });

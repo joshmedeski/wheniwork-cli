@@ -10,21 +10,29 @@ import { Pace } from "./pace";
 import Formatter from "./formatter";
 import Hours from "./hours";
 import "./helpers/array.helpers";
+import { StorageService } from "./model/storage.service";
 
 program
   .name("When I Work")
+  .option("-l, --login", "make a login request")
   .option("-p, --pace", "show Pace Table")
   .option("-t, --timesheet", "show Time Sheet Table")
   .version("1.0.0")
   .parse(process.argv);
 
-const api = new ApiService();
+(function() {
+  const api = new ApiService();
+  const storage = new StorageService();
 
-// TODO: Store the api token for future requests
-// TODO: Check if token is valid before
+  if (program.login) return api.login(storage.username, storage.password);
 
-api.week.then(week => {
-  new Hours(week);
-  if (program.timesheet) new TimeSheet(week);
-  if (program.pace) new Pace(week);
-});
+  if (!storage.hasAll()) {
+    console.error("Run `wheniwork -l` to login before continuing");
+  }
+
+  api.week.then(week => {
+    new Hours(week); // default
+    if (program.timesheet) new TimeSheet(week);
+    if (program.pace) new Pace(week);
+  });
+})();
