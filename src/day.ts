@@ -1,4 +1,4 @@
-import { WhenIWorkApiTime } from "./api";
+import { WhenIWorkApiTime } from "./model/api.service";
 import Calculator from "./calculator";
 
 export class Day {

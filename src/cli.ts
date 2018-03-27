@@ -6,7 +6,7 @@ import * as program from "commander";
 import * as Table from "cli-table";
 import chalk from "chalk";
 import { TimeSheet } from "./timesheet";
-import { Api } from "./api";
+import { ApiService } from "./model/api.service";
 import { Pace } from "./pace";
 import * as os from "os";
 import Formatter from "./formatter";
@@ -14,7 +14,7 @@ import Hours from "./hours";
 
 require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
-const api = new Api();
+const api = new ApiService();
 
 // TODO: Move array prototypes to separate file
 

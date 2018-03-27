@@ -1,4 +1,4 @@
-import { WhenIWorkApiTime } from "./api";
+import { WhenIWorkApiTime } from "./model/api.service";
 import { DayTotal, Day } from "./day";
 import { startOfWeek, differenceInMinutes, addHours, getDay } from "date-fns";
 

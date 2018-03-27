@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import Week from "./week";
+import Week from "../week";
 import { startOfWeek, endOfWeek } from "date-fns";
 
 export interface WhenIWorkApiTime {
@@ -29,7 +29,7 @@ export interface WhenIWorkApiTime {
   user_id: number;
 }
 
-export class Api {
+export class ApiService {
   url: string = "https://api.wheniwork.com/2";
   token: string;
   userID: string;
