@@ -22,15 +22,10 @@ export class ApiService {
       },
       method: "POST"
     })
-    .then(response => response.json())
-    .then(response => {
-      console.log("Save the following lines to your .wheniwork file:");
-      console.log(`WHENIWORK_USERID=${response.user.id}`);
-      console.log(`WHENIWORK_TOKEN=${response.token}`);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => response.json())
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   // TODO: Write token and user id to wheniwork file
@@ -46,18 +41,18 @@ export class ApiService {
       {
         headers: {
           "content-type": "application/json",
-          "W-Token": this.storage.token;
+          "W-Token": this.storage.token
         },
         method: "GET"
       }
     )
-    .then(response => response.json())
-    .then(json => {
-      return json.times;
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => response.json())
+      .then(json => {
+        return json.times;
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   // TODO: Move getting this week to controller

@@ -25,7 +25,13 @@ program
   const api = new ApiService();
   const storage = new StorageService();
 
-  if (program.login) return api.login(storage.username, storage.password);
+  if (program.login) {
+    return api.login(storage.username, storage.password).then(response => {
+      console.log("Save the following lines to your .wheniwork file:");
+      console.log(`WHENIWORK_USERID=${response.user.id}`);
+      console.log(`WHENIWORK_TOKEN=${response.token}`);
+    });
+  }
 
   if (!storage.hasAll()) {
     console.error("Run `wheniwork -l` to login before continuing");
