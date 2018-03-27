@@ -17,6 +17,7 @@ export class PaceTable {
 
     // TODO: Move last work day determination into higher level model
     this.lastWorkDay = new Date(week.days[week.days.length - 1].date).getDay();
+    // TODO: Move total hours to higher level in the model
     this.totalHours = week.days.reduce((accumulator, currentValue) => {
       const hours = currentValue.total.worked || 0;
       return accumulator + hours;
