@@ -26,8 +26,8 @@ export class ApiService {
     })
       .then(response => response.json())
       .then(response => {
-        this.token = response.token;
-        this.userID = response.user.id;
+        this.token = response.token; // TODO: Save to dotfile
+        this.userID = response.user.id; // TODO: Save to dotfile
         return response;
       })
       .catch(error => {
@@ -42,12 +42,10 @@ export class ApiService {
   //   console.log('Saved!');
   // });
 
-  get times(): Promise<Time[]> {
-    const mon = startOfWeek(new Date());
-    const sat = endOfWeek(new Date());
+  times(userId: string, start: Date, end: Date): Promise<Time[]> {
     return this.login(this.storage.username, this.storage.password).then(() => {
       return fetch(
-        `${this.url}/times/?user_id=${this.userID}&start=${mon}&end=${sat}`,
+        `${this.url}/times/?user_id=${userId}&start=${start}&end=${end}`,
         {
           headers: {
             "content-type": "application/json",
@@ -68,7 +66,9 @@ export class ApiService {
   }
 
   get week(): Promise<Week> {
-    return this.times.then(times => {
+    const mon = startOfWeek(new Date());
+    const sat = endOfWeek(new Date());
+    return this.times(this.userID, mon, sat).then(times => {
       const newWeek = new Week(times);
       return newWeek;
     });
