@@ -47,12 +47,8 @@ export class ApiService {
       }
     )
       .then(response => response.json())
-      .then(json => {
-        return json.times;
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(json => json.times)
+      .catch(error => console.error(error));
   }
 
   // TODO: Move getting this week to controller
