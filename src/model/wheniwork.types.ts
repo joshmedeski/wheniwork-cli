@@ -1,0 +1,26 @@
+export type Time = {
+  account_id: number;
+  alert_type: number;
+  break_hours: number;
+  created_at: Date;
+  creator_id: number;
+  end_time: Date;
+  hourly_rate: number;
+  id: number;
+  is_alerted: boolean;
+  is_approved: true;
+  length: number;
+  location_id: number;
+  modified_by: number;
+  notes: string;
+  position_id: number;
+  shift_id: number;
+  site_id: number;
+  split_time: Date;
+  start_time: Date;
+  sync_hash: string;
+  sync_id: string;
+  time_id: string;
+  updated_at: Date;
+  user_id: number;
+};

@@ -1,4 +1,4 @@
-import { WhenIWorkApiTime } from "./model/api.service";
+import { Time } from "./model/wheniwork.types";
 import Calculator from "./calculator";
 
 export class Day {
@@ -7,7 +7,7 @@ export class Day {
   slots: DaySlots;
   total: DayTotal;
 
-  constructor(time: WhenIWorkApiTime) {
+  constructor(time: Time) {
     this.slots = new DaySlots();
     this.total = new DayTotal();
 

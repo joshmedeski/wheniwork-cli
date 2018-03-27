@@ -1,4 +1,4 @@
-import { WhenIWorkApiTime } from "./model/api.service";
+import { Time } from "./model/wheniwork.types";
 import { DayTotal, Day } from "./day";
 import { startOfWeek, differenceInMinutes, addHours, getDay } from "date-fns";
 
@@ -9,7 +9,7 @@ class Week {
   days: Day[];
   total: DayTotal;
 
-  constructor(times: WhenIWorkApiTime[]) {
+  constructor(times: Time[]) {
     this.days = [];
     const timesThisWeek = times.filter(this.isDayThisWeek);
     const timesToDays: Day[] = [];
@@ -39,7 +39,7 @@ class Week {
     mergedDay.total.worked = mergedDay.total.worked + day.total.worked;
   }
 
-  dayAlreadyExists(time: WhenIWorkApiTime): boolean {
+  dayAlreadyExists(time: Time): boolean {
     return false;
   }
 
@@ -49,7 +49,7 @@ class Week {
    * @param time The time to check.
    * @returns true if the start time is greater than or equal to the start of this week.
    */
-  isDayThisWeek(time: WhenIWorkApiTime): boolean {
+  isDayThisWeek(time: Time): boolean {
     let startOfThisWeek = startOfWeek(new Date());
     return time.start_time && new Date(time.start_time) >= startOfThisWeek;
   }

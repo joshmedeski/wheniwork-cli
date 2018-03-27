@@ -2,33 +2,7 @@ import fetch from "node-fetch";
 import Week from "../week";
 import { startOfWeek, endOfWeek } from "date-fns";
 import { StorageService } from "./storage.service";
-
-export interface WhenIWorkApiTime {
-  account_id: number;
-  alert_type: number;
-  break_hours: number;
-  created_at: Date;
-  creator_id: number;
-  end_time: Date;
-  hourly_rate: number;
-  id: number;
-  is_alerted: boolean;
-  is_approved: true;
-  length: number;
-  location_id: number;
-  modified_by: number;
-  notes: string;
-  position_id: number;
-  shift_id: number;
-  site_id: number;
-  split_time: Date;
-  start_time: Date;
-  sync_hash: string;
-  sync_id: string;
-  time_id: string;
-  updated_at: Date;
-  user_id: number;
-}
+import { Time } from "./wheniwork.types";
 
 export class ApiService {
   storage = new StorageService();
@@ -68,7 +42,7 @@ export class ApiService {
   //   console.log('Saved!');
   // });
 
-  get times(): Promise<WhenIWorkApiTime[]> {
+  get times(): Promise<Time[]> {
     const mon = startOfWeek(new Date());
     const sat = endOfWeek(new Date());
     return this.login(this.storage.username, this.storage.password).then(() => {
