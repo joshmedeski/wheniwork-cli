@@ -8,11 +8,11 @@ import { ApiService } from "./model/api.service";
 import Formatter from "./formatter";
 import "./helpers/array.helpers";
 import { StorageService } from "./model/storage.service";
+import { startOfWeek, endOfWeek } from "date-fns";
 
 import { PaceTable } from "./views/pace.table";
 import { HoursTable } from "./views/hours.table";
 import { TimeSheetTable } from "./views/timesheet.table";
-import { TimesService } from "./model/times.service";
 
 program
   .name("When I Work")
@@ -24,7 +24,6 @@ program
 
 (function() {
   const api = new ApiService();
-  const times = new TimesService();
   const storage = new StorageService();
 
   if (program.login) {
@@ -39,9 +38,13 @@ program
     console.error("Run `wheniwork -l` to login before continuing");
   }
 
-  times.thisWeek.then(thisWeek => {
-    new HoursTable(thisWeek); // default
-    if (program.timesheet) new TimeSheetTable(thisWeek);
-    if (program.pace) new PaceTable(thisWeek);
+  // TODO: Make dynamic
+  const start = startOfWeek(new Date());
+  const end = endOfWeek(new Date());
+
+  api.dateRange(start, end).then(dateRange => {
+    new HoursTable(dateRange); // default
+    if (program.timesheet) new TimeSheetTable(dateRange);
+    if (program.pace) new PaceTable(dateRange);
   });
 })();

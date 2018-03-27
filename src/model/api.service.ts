@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import { StorageService } from "./storage.service";
 import { Time } from "./wheniwork.types";
+import { DateRange } from "../dates/date-range";
 
 export class ApiService {
   storage = new StorageService();
@@ -33,9 +34,11 @@ export class ApiService {
       .catch(error => console.error(error));
   }
 
-  times(userId: string, start: Date, end: Date): Promise<Time[]> {
+  times(start: Date, end: Date): Promise<Time[]> {
     return fetch(
-      `${this.url}/times/?user_id=${userId}&start=${start}&end=${end}`,
+      `${this.url}/times/?user_id=${
+        this.storage.userId
+      }&start=${start}&end=${end}`,
       {
         headers: {
           "content-type": "application/json",
@@ -47,5 +50,9 @@ export class ApiService {
       .then(response => response.json())
       .then(json => json.times)
       .catch(error => console.error(error));
+  }
+
+  dateRange(start: Date, end: Date): Promise<DateRange> {
+    return this.times(start, end).then(times => new DateRange(times));
   }
 }
