@@ -11,26 +11,20 @@ import Formatter from "./formatter";
 import Hours from "./hours";
 import "./helpers/array.helpers";
 
+program
+  .name("When I Work")
+  .option("-p, --pace", "show Pace Table")
+  .option("-t, --timesheet", "show Time Sheet Table")
+  .version("1.0.0")
+  .parse(process.argv);
+
 const api = new ApiService();
 
 // TODO: Store the api token for future requests
 // TODO: Check if token is valid before
-// TODO: Check
 
 api.week.then(week => {
-  const timesheet = new TimeSheet(week);
-  const hours = new Hours(week);
-  const pace = new Pace(week);
+  new Hours(week);
+  if (program.timesheet) new TimeSheet(week);
+  if (program.pace) new Pace(week);
 });
-
-//   // TODO: Add flag for showing time sheets (-t)
-//   const timeSheet = new TimeSheet(times);
-//   // TODO: Add flat for adding pace (-p)
-//   const pace = new Pace(times);
-
-program
-  .name("When I Work")
-  .version("1.0.0")
-  .parse(process.argv);
-
-const format = new Formatter();
