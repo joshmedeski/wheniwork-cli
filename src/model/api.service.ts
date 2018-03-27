@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import Week from "../week";
+import Week from "./week.model";
 import { startOfWeek, endOfWeek } from "date-fns";
 import { StorageService } from "./storage.service";
 import { Time } from "./wheniwork.types";

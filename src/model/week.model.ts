@@ -1,5 +1,5 @@
-import { Time } from "./model/wheniwork.types";
-import { DayTotal, Day } from "./day";
+import { Time } from "./wheniwork.types";
+import { DayTotal, Day } from "./day.model";
 import { startOfWeek, differenceInMinutes, addHours, getDay } from "date-fns";
 
 /**

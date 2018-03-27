@@ -1,6 +1,6 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
-import Week from "../week";
+import Week from "../model/week.model";
 import Formatter from "../formatter";
 
 export class TimeSheetTable {
@@ -11,8 +11,6 @@ export class TimeSheetTable {
     this.table = new Table({
       head: ["Time Slot", "In", "Out", "Worked"].chalkResetBold()
     });
-
-    week.days.reverse();
 
     week.days.forEach(day => {
       day.slots.worked.forEach(slot => {

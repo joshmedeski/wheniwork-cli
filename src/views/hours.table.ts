@@ -1,5 +1,5 @@
 import * as Table from "cli-table";
-import Week from "../week";
+import Week from "../model/week.model";
 import Formatter from "../formatter";
 
 export class HoursTable {
