@@ -1,9 +1,9 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
-import Week from "./week";
-import Formatter from "./formatter";
+import Week from "../week";
+import Formatter from "../formatter";
 
-export class TimeSheet {
+export class TimeSheetTable {
   format = new Formatter();
   table: Table;
 

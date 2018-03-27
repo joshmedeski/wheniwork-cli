@@ -1,8 +1,8 @@
 import * as Table from "cli-table";
-import Week from "./week";
-import Formatter from "./formatter";
+import Week from "../week";
+import Formatter from "../formatter";
 
-class Hours {
+export class HoursTable {
   format = new Formatter();
   table: Table;
 
@@ -19,5 +19,3 @@ class Hours {
     console.log(this.table.toString());
   }
 }
-
-export default Hours;

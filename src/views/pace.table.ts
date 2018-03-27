@@ -1,9 +1,9 @@
-import Calculator from "./calculator";
+import Calculator from "../calculator";
 import * as Table from "cli-table";
-import Week from "./week";
-import Formatter from "./formatter";
+import Week from "../week";
+import Formatter from "../formatter";
 
-export class Pace {
+export class PaceTable {
   calc = new Calculator();
   format = new Formatter();
   table: Table;

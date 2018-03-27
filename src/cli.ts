@@ -4,13 +4,14 @@
 
 import * as program from "commander";
 import * as Table from "cli-table";
-import { TimeSheet } from "./timesheet";
 import { ApiService } from "./model/api.service";
-import { Pace } from "./pace";
 import Formatter from "./formatter";
-import Hours from "./hours";
 import "./helpers/array.helpers";
 import { StorageService } from "./model/storage.service";
+
+import { PaceTable } from "./views/pace.table";
+import { HoursTable } from "./views/hours.table";
+import { TimeSheetTable } from "./views/timesheet.table";
 
 program
   .name("When I Work")
@@ -31,8 +32,8 @@ program
   }
 
   api.week.then(week => {
-    new Hours(week); // default
-    if (program.timesheet) new TimeSheet(week);
-    if (program.pace) new Pace(week);
+    new HoursTable(week); // default
+    if (program.timesheet) new TimeSheetTable(week);
+    if (program.pace) new PaceTable(week);
   });
 })();
