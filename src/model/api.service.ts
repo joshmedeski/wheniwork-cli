@@ -1,6 +1,4 @@
 import fetch from "node-fetch";
-import { DateRange } from "../dates/date-range";
-import { startOfWeek, endOfWeek } from "date-fns";
 import { StorageService } from "./storage.service";
 import { Time } from "./wheniwork.types";
 
@@ -49,15 +47,5 @@ export class ApiService {
       .then(response => response.json())
       .then(json => json.times)
       .catch(error => console.error(error));
-  }
-
-  // TODO: Move getting this week to controller
-  get week(): Promise<DateRange> {
-    const mon = startOfWeek(new Date());
-    const sat = endOfWeek(new Date());
-    return this.times(this.storage.userId, mon, sat).then(times => {
-      const newWeek = new DateRange(times);
-      return newWeek;
-    });
   }
 }
