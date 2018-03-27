@@ -10,6 +10,15 @@ export class ApiService {
 
   constructor() {}
 
+  /**
+   * Makes a login request to the api.
+   *
+   * `POST /login`
+   *
+   * @param username The account username
+   * @param password The account password
+   * @returns The login response data
+   */
   login(username: string, password: string) {
     return fetch(`${this.url}/login`, {
       body: JSON.stringify({
@@ -23,17 +32,8 @@ export class ApiService {
       method: "POST"
     })
       .then(response => response.json())
-      .catch(error => {
-        console.error(error);
-      });
+      .catch(error => console.error(error));
   }
-
-  // TODO: Write token and user id to wheniwork file
-  //   const fs = require('fs');
-  // fs.appendFile('message.txt', 'data to append', function (err) {
-  //   if (err) throw err;
-  //   console.log('Saved!');
-  // });
 
   times(userId: string, start: Date, end: Date): Promise<Time[]> {
     return fetch(
