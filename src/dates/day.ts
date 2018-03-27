@@ -1,4 +1,4 @@
-import { Time } from "./wheniwork.types";
+import { Time } from "../model/wheniwork.types";
 import Calculator from "../calculator";
 
 export class Day {

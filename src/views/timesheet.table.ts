@@ -1,6 +1,6 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
-import Week from "../model/week.model";
+import Week from "../dates/week";
 import Formatter from "../formatter";
 
 export class TimeSheetTable {
