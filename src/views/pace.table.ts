@@ -6,11 +6,12 @@ import Formatter from "../formatter";
 export class PaceTable {
   calc = new Calculator();
   format = new Formatter();
+  dateRange: DateRange;
   table: Table;
-  totalHours: number;
   lastWorkDay: number;
 
   constructor(dateRange: DateRange) {
+    this.dateRange = dateRange;
     this.table = new Table({
       head: ["Pace", "Hours", "Difference"].chalkResetBold()
     });
@@ -19,11 +20,6 @@ export class PaceTable {
     this.lastWorkDay = new Date(
       dateRange.days[dateRange.days.length - 1].date
     ).getDay();
-    // TODO: Move total hours to higher level in the model
-    this.totalHours = dateRange.days.reduce((accumulator, currentValue) => {
-      const hours = currentValue.total.worked || 0;
-      return accumulator + hours;
-    }, 0);
 
     this.row("Minimum", 35);
     this.row("Standard", 40);
@@ -38,8 +34,11 @@ export class PaceTable {
     const displayPace = currentPace === pace ? pace : `${currentPace}/${pace}`;
     this.table.push([
       title,
-      `${this.totalHours.toFixed(2)} of ${displayPace}`,
-      this.calc.difference(this.totalHours, dailyPace * this.lastWorkDay)
+      `${this.dateRange.total.worked.toFixed(2)} of ${displayPace}`,
+      this.calc.difference(
+        this.dateRange.total.worked,
+        dailyPace * this.lastWorkDay
+      )
     ]);
   }
 }

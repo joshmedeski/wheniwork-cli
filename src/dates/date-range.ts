@@ -27,6 +27,11 @@ export class DateRange {
       });
       dayIndex < 0 ? this.days.push(time) : this.mergeDays(dayIndex, time);
     });
+
+    this.total.worked = this.days.reduce((accumulator, currentValue) => {
+      const hours = currentValue.total.worked || 0;
+      return accumulator + hours;
+    }, 0);
   }
 
   mergeDays(index: number, day: Day) {
