@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import Week from "../week";
 import { startOfWeek, endOfWeek } from "date-fns";
+import { StorageService } from "./storage.service";
 
 export interface WhenIWorkApiTime {
   account_id: number;
@@ -30,6 +31,7 @@ export interface WhenIWorkApiTime {
 }
 
 export class ApiService {
+  storage = new StorageService();
   url: string = "https://api.wheniwork.com/2";
   token: string;
   userID: string;
@@ -44,7 +46,7 @@ export class ApiService {
       }),
       headers: {
         "content-type": "application/json",
-        "W-Key": process.env.WHENIWORK_KEY
+        "W-Key": this.storage.key
       },
       method: "POST"
     })
@@ -69,10 +71,7 @@ export class ApiService {
   get times(): Promise<WhenIWorkApiTime[]> {
     const mon = startOfWeek(new Date());
     const sat = endOfWeek(new Date());
-    return this.login(
-      process.env.WHENIWORK_USERNAME,
-      process.env.WHENIWORK_PASSWORD
-    ).then(() => {
+    return this.login(this.storage.username, this.storage.password).then(() => {
       return fetch(
         `${this.url}/times/?user_id=${this.userID}&start=${mon}&end=${sat}`,
         {

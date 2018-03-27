@@ -8,11 +8,8 @@ import chalk from "chalk";
 import { TimeSheet } from "./timesheet";
 import { ApiService } from "./model/api.service";
 import { Pace } from "./pace";
-import * as os from "os";
 import Formatter from "./formatter";
 import Hours from "./hours";
-
-require("dotenv").config({ path: `${os.homedir()}/.wheniwork` });
 
 const api = new ApiService();
 
