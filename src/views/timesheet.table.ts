@@ -1,18 +1,18 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
-import Week from "../dates/week";
+import { DateRange } from "../dates/date-range";
 import Formatter from "../formatter";
 
 export class TimeSheetTable {
   format = new Formatter();
   table: Table;
 
-  constructor(week: Week) {
+  constructor(dateRange: DateRange) {
     this.table = new Table({
       head: ["Time Slot", "In", "Out", "Worked"].chalkResetBold()
     });
 
-    week.days.forEach(day => {
+    dateRange.days.forEach(day => {
       day.slots.worked.forEach(slot => {
         this.table.push([
           this.format.date(slot.clockIn),

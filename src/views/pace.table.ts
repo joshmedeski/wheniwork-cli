@@ -1,6 +1,6 @@
 import Calculator from "../calculator";
 import * as Table from "cli-table";
-import Week from "../dates/week";
+import { DateRange } from "../dates/date-range";
 import Formatter from "../formatter";
 
 export class PaceTable {
@@ -10,15 +10,17 @@ export class PaceTable {
   totalHours: number;
   lastWorkDay: number;
 
-  constructor(week: Week) {
+  constructor(dateRange: DateRange) {
     this.table = new Table({
       head: ["Pace", "Hours", "Difference"].chalkResetBold()
     });
 
     // TODO: Move last work day determination into higher level model
-    this.lastWorkDay = new Date(week.days[week.days.length - 1].date).getDay();
+    this.lastWorkDay = new Date(
+      dateRange.days[dateRange.days.length - 1].date
+    ).getDay();
     // TODO: Move total hours to higher level in the model
-    this.totalHours = week.days.reduce((accumulator, currentValue) => {
+    this.totalHours = dateRange.days.reduce((accumulator, currentValue) => {
       const hours = currentValue.total.worked || 0;
       return accumulator + hours;
     }, 0);
