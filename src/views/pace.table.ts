@@ -8,7 +8,6 @@ export class PaceTable {
   format = new Formatter();
   dateRange: DateRange;
   table: Table;
-  lastWorkDay: number;
 
   constructor(dateRange: DateRange) {
     this.dateRange = dateRange;
@@ -16,29 +15,19 @@ export class PaceTable {
       head: ["Pace", "Hours", "Difference"].chalkResetBold()
     });
 
-    // TODO: Move last work day determination into higher level model
-    this.lastWorkDay = new Date(
-      dateRange.days[dateRange.days.length - 1].date
-    ).getDay();
-
-    this.row("Minimum", 35);
-    this.row("Standard", 40);
-    this.row("Overtime", 45);
+    this.row("Minimum", 7);
+    this.row("Standard", 8);
+    this.row("Overtime", 9);
 
     console.log(this.table.toString());
   }
 
-  private row(title: string, pace: number) {
-    const dailyPace = pace / 5;
-    const currentPace = pace * this.lastWorkDay / 5;
-    const displayPace = currentPace === pace ? pace : `${currentPace}/${pace}`;
+  private row(title: string, targetHours: number) {
+    const totalTargetHours = this.dateRange.days.length * targetHours;
     this.table.push([
-      title,
-      `${this.dateRange.total.worked.toFixed(2)} of ${displayPace}`,
-      this.calc.difference(
-        this.dateRange.total.worked,
-        dailyPace * this.lastWorkDay
-      )
+      `${title} (${targetHours})`,
+      `${this.dateRange.total.worked.toFixed(2)} of ${totalTargetHours}`,
+      this.calc.difference(this.dateRange.total.worked, totalTargetHours)
     ]);
   }
 }
