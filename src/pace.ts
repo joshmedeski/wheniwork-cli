@@ -29,11 +29,13 @@ export class Pace {
   }
 
   private row(title: string, pace: number) {
-    const dayPace = pace / 5;
+    const dailyPace = pace / 5;
+    const currentPace = pace * this.lastWorkDay / 5;
+    const displayPace = currentPace === pace ? pace : `${currentPace}/${pace}`;
     this.table.push([
       title,
-      `${this.totalHours.toFixed(2)} of ${pace * this.lastWorkDay / 5}/${pace}`,
-      this.calc.difference(this.totalHours, dayPace * this.lastWorkDay)
+      `${this.totalHours.toFixed(2)} of ${displayPace}`,
+      this.calc.difference(this.totalHours, dailyPace * this.lastWorkDay)
     ]);
   }
 }
