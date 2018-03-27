@@ -10,15 +10,15 @@ export class Day {
   constructor(time: Time) {
     this.slots = new DaySlots();
     this.total = new DayTotal();
-
-    this.total.worked =
+    const hoursWorked =
       time.length > 0 ? time.length : this.calc.workedSoFar(time.start_time);
 
+    this.total.worked = hoursWorked;
     this.date = time.start_time;
     this.slots.worked.push({
       clockIn: time.start_time,
       clockOut: time.end_time,
-      hours: time.length
+      hours: hoursWorked
     });
   }
 }
