@@ -1,7 +1,6 @@
 #!/usr/bin/env node --harmony
 
 const pkg = require("../package.json");
-
 import * as program from "commander";
 import * as Table from "cli-table";
 import { ApiService } from "./model/api.service";
