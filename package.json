@@ -1,8 +1,12 @@
 {
   "name": "wheniwork-cli",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "A CLI for showing WhenIWork timesheet information.",
-  "keywords": ["wheniwork", "cli", "productivity"],
+  "keywords": [
+    "wheniwork",
+    "cli",
+    "productivity"
+  ],
   "main": "./src/cli.ts",
   "repository": {
     "type": "git",
