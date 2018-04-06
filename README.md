@@ -4,6 +4,14 @@
 
 A command-line-tool for displaying my information for the week.
 
+## Screenshots
+
+So what's this thing look like anyways?
+
+![When I Work CLI Hours Table](./screenshots/wheniwork-cli-table-hours.png)
+![When I Work CLI Timesheet Table](./screenshots/wheniwork-cli-table-timesheet.png)
+![When I Work CLI Pace Table](./screenshots/wheniwork-cli-table-pace.png)
+
 ## Setup
 
 Install the package:
