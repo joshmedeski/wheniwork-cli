@@ -1,7 +1,8 @@
 {
-  "name": "wheniwork-cli",
+  "name": "@joshmedeski/wheniwork-cli",
   "version": "1.0.0",
-  "description": "A command-line-tool for displaying my information for the week.",
+  "description":
+    "A command-line-tool for displaying my information for the week.",
   "main": "./src/cli.ts",
   "scripts": {
     "test": "jest",

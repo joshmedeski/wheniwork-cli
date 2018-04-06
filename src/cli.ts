@@ -1,7 +1,5 @@
 #!/usr/bin/env node --harmony
 
-// TODO: Publish to NPM
-
 import * as program from "commander";
 import * as Table from "cli-table";
 import { ApiService } from "./model/api.service";
@@ -17,8 +15,8 @@ import { TimeSheetTable } from "./views/timesheet.table";
 program
   .name("When I Work")
   .option("-l, --login", "make a login request")
-  .option("-p, --pace", "show Pace Table")
-  .option("-t, --timesheet", "show Time Sheet Table")
+  .option("-p, --pace", "show pace table")
+  .option("-t, --timesheet", "show time sheet table")
   .version("1.0.0")
   .parse(process.argv);
 
@@ -27,24 +25,37 @@ program
   const storage = new StorageService();
 
   if (program.login) {
-    return api.login(storage.username, storage.password).then(response => {
-      console.log("Save the following lines to your .wheniwork file:");
-      console.log(`WHENIWORK_USERID=${response.user.id}`);
-      console.log(`WHENIWORK_TOKEN=${response.token}`);
-    });
+    return api
+      .login(storage.username, storage.password)
+      .then(response => {
+        console.log("Save the following lines to your ~/.wheniwork file:");
+        console.log(`WHENIWORK_USERID=${response.user.id}`);
+        console.log(`WHENIWORK_TOKEN=${response.token}`);
+      })
+      .catch(error => {
+        console.error(
+          "Whoops, login failed. Make sure your credentials are correct and try again."
+        );
+      });
   }
 
   if (!storage.hasAll()) {
     console.error("Run `wheniwork -l` to login before continuing");
   }
 
-  // TODO: Make dynamic
   const start = startOfWeek(new Date());
   const end = endOfWeek(new Date());
 
-  api.dateRange(start, end).then(dateRange => {
-    new HoursTable(dateRange); // default
-    if (program.timesheet) new TimeSheetTable(dateRange);
-    if (program.pace) new PaceTable(dateRange);
-  });
+  api
+    .dateRange(start, end)
+    .then(dateRange => {
+      new HoursTable(dateRange); // default
+      if (program.timesheet) new TimeSheetTable(dateRange);
+      if (program.pace) new PaceTable(dateRange);
+    })
+    .catch(error => {
+      console.error(
+        "The date range request failed, please check your config file and try again"
+      );
+    });
 })();
