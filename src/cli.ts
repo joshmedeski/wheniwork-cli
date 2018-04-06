@@ -1,5 +1,10 @@
 #!/usr/bin/env node --harmony
 
+const updateNotifier = require("update-notifier");
+const pkg = require("../package.json");
+
+updateNotifier({ pkg }).notify();
+
 import * as program from "commander";
 import * as Table from "cli-table";
 import { ApiService } from "./model/api.service";

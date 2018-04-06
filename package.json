@@ -1,8 +1,7 @@
 {
   "name": "@joshmedeski/wheniwork-cli",
-  "version": "1.0.0",
-  "description":
-    "A command-line-tool for displaying my information for the week.",
+  "version": "0.9.0",
+  "description": "A CLI for showing WhenIWork timesheet information.",
   "main": "./src/cli.ts",
   "scripts": {
     "test": "jest",
@@ -17,7 +16,7 @@
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
     "node-fetch": "^2.1.1",
-    "npm": "^5.7.1"
+    "update-notifier": "^2.4.0"
   },
   "bin": {
     "wheniwork": "./dist/cli.js"
