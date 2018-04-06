@@ -1,6 +1,5 @@
 #!/usr/bin/env node --harmony
 
-const updateNotifier = require("update-notifier");
 const pkg = require("../package.json");
 
 import * as program from "commander";
@@ -9,6 +8,7 @@ import { ApiService } from "./model/api.service";
 import Formatter from "./formatter";
 import "./helpers/array.helpers";
 import { StorageService } from "./model/storage.service";
+import { UpdateNotifier } from "./update-notifier";
 import { startOfWeek, endOfWeek } from "date-fns";
 
 import { PaceTable } from "./views/pace.table";
@@ -24,7 +24,8 @@ program
   .parse(process.argv);
 
 (function() {
-  updateNotifier({ pkg }).notify();
+  new UpdateNotifier(pkg);
+
   const api = new ApiService();
   const storage = new StorageService();
 
