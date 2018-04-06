@@ -1,5 +1,5 @@
 {
-  "name": "@joshmedeski/wheniwork-cli",
+  "name": "wheniwork-cli",
   "version": "0.9.0",
   "description": "A CLI for showing WhenIWork timesheet information.",
   "main": "./src/cli.ts",
