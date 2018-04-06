@@ -12,22 +12,22 @@
   "dependencies": {
     "chalk": "^2.3.2",
     "cli-table": "^0.3.1",
-    "commander": "^2.14.1",
+    "commander": "^2.15.1",
     "date-fns": "^1.29.0",
     "dotenv": "^5.0.1",
-    "node-fetch": "^2.1.1",
+    "node-fetch": "^2.1.2",
     "update-notifier": "^2.4.0"
   },
   "bin": {
     "wheniwork": "./dist/cli.js"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.7",
-    "@types/node-fetch": "^1.6.7",
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.2",
+    "@types/node-fetch": "^1.6.8",
     "prettier": "^1.11.1",
-    "ts-jest": "^22.4.1",
+    "ts-jest": "^22.4.2",
     "ts-node": "^5.0.1",
-    "typescript": "^2.7.2"
+    "typescript": "^2.8.1"
   }
 }
