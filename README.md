@@ -17,7 +17,7 @@ So what's this thing look like anyways?
 Install the package:
 
 ```bash
-$ npm install -g @joshmedeski/wheniwork-cli
+$ npm install -g wheniwork-cli
 ```
 
 Add `~/.wheniwork` to your home directory (`$HOME`) with the following credentials:
