@@ -22,7 +22,7 @@ program
   .option("-l, --login", "make a login request")
   .option("-p, --pace", "show pace table")
   .option("-t, --timesheet", "show time sheet table")
-  .version("1.0.0")
+  .version(pkg.version)
   .parse(process.argv);
 
 (function() {
