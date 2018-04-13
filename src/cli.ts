@@ -13,12 +13,14 @@ import { startOfWeek, endOfWeek } from "date-fns";
 import { PaceTable } from "./views/pace.table";
 import { HoursTable } from "./views/hours.table";
 import { TimeSheetTable } from "./views/timesheet.table";
+import { UnpaidBreaksTable } from "./views/unpaid-breaks.table";
 
 program
   .name("When I Work")
   .option("-l, --login", "make a login request")
   .option("-p, --pace", "show pace table")
   .option("-t, --timesheet", "show time sheet table")
+  .option("-u, --unpaidBreaks", "show unpaid breaks table")
   .version(pkg.version)
   .parse(process.argv);
 
@@ -55,6 +57,7 @@ program
     .then(dateRange => {
       new HoursTable(dateRange); // default
       if (program.timesheet) new TimeSheetTable(dateRange);
+      if (program.unpaidBreaks) new UnpaidBreaksTable(dateRange);
       if (program.pace) new PaceTable(dateRange);
     })
     .catch(error => {

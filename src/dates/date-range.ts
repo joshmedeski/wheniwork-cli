@@ -1,6 +1,6 @@
 import { Time } from "../model/wheniwork.types";
 import { DayTotal, Day } from "./day";
-import { getDay } from "date-fns";
+import { getDay, differenceInMinutes } from "date-fns";
 
 /**
  * Converts a list of times from the API into structure data for the CLI.
@@ -40,5 +40,19 @@ export class DateRange {
       day.slots.worked
     );
     mergedDay.total.worked = mergedDay.total.worked + day.total.worked;
+    this.calcUnpaidBreak(index, day);
+  }
+
+  calcUnpaidBreak(index: number, day: Day) {
+    const startTime = this.days[index].slots.worked[0].clockOut;
+    const endTime = day.slots.worked[0].clockIn;
+    const total = differenceInMinutes(endTime, startTime) / 60;
+    this.days[index].slots.unpaidBreak.push({
+      clockIn: startTime,
+      clockOut: endTime,
+      hours: total
+    });
+    this.days[index].total.unpaidBreaks =
+      this.days[index].total.unpaidBreaks + day.total.unpaidBreaks;
   }
 }
