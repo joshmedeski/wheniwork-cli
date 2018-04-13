@@ -45,7 +45,7 @@ class Calculator {
         differenceOut = chalk.green(`+${this.format.hours(difference)}`);
         break;
       case difference == 0:
-        differenceOut = chalk.yellow(this.format.hours(0));
+        differenceOut = ` ${chalk.yellow(this.format.hours(0))}`;
         break;
       case difference < 0:
         differenceOut = chalk.red(
