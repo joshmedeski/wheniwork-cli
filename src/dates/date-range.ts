@@ -36,8 +36,8 @@ export class DateRange {
 
   mergeDays(index: number, day: Day) {
     const mergedDay = this.days[index];
-    this.days[index].slots.worked = day.slots.worked.concat(
-      mergedDay.slots.worked
+    this.days[index].slots.worked = mergedDay.slots.worked.concat(
+      day.slots.worked
     );
     mergedDay.total.worked = mergedDay.total.worked + day.total.worked;
   }
