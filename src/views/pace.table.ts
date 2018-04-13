@@ -12,7 +12,7 @@ export class PaceTable {
   constructor(dateRange: DateRange) {
     this.dateRange = dateRange;
     this.table = new Table({
-      head: ["Pace", "Hours", "Difference"].chalkResetBold()
+      head: ["Pace", "Hours", "Diff", "Time"].chalkResetBold()
     });
 
     this.row("Minimum", 7);
@@ -27,7 +27,8 @@ export class PaceTable {
     this.table.push([
       `${title} (${targetHours})`,
       `${this.dateRange.total.worked.toFixed(2)} of ${totalTargetHours}`,
-      this.calc.difference(this.dateRange.total.worked, totalTargetHours)
+      this.calc.difference(this.dateRange.total.worked, totalTargetHours),
+      this.calc.estimateEndTime(this.dateRange.total.worked, totalTargetHours)
     ]);
   }
 }

@@ -1,8 +1,8 @@
 import {
   format,
   differenceInHours,
-  addHours,
-  differenceInMinutes
+  differenceInMinutes,
+  addHours
 } from "date-fns";
 import chalk from "chalk";
 import Formatter from "./formatter";
@@ -16,10 +16,9 @@ class Calculator {
     return minutesWorked / 60;
   }
 
-  estimateEndTime(time) {
-    const hoursToAdd = 8 - time.length;
-    time.end_time = addHours(new Date(), hoursToAdd);
-    return time;
+  estimateEndTime(hours: number, comparison: number) {
+    let difference: number = Number(hours - comparison) * -1;
+    return format(addHours(new Date(), difference), "hh:mma");
   }
 
   /**
