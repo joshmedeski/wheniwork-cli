@@ -38,7 +38,7 @@ export class ApiService {
     return fetch(
       `${this.url}/times/?user_id=${
         this.storage.userId
-      }&start=${start}&end=${end}`,
+      }&start=${start.toISOString()}&end=${end.toISOString()}`,
       {
         headers: {
           "content-type": "application/json",
