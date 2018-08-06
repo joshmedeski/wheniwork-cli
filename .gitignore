@@ -2,5 +2,6 @@
 .DS_Store
 
 # project
+coverage
 node_modules
 dist
