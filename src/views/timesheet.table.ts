@@ -22,6 +22,16 @@ export class TimeSheetTable {
         ]);
       });
     });
+
+    this.table.push(
+      [
+        "",
+        "",
+        "Total",
+        this.format.hours(dateRange.total.worked)
+      ].chalkResetBold()
+    );
+
     console.log(this.table.toString());
   }
 }

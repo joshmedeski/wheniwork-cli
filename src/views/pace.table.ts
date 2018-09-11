@@ -19,6 +19,15 @@ export class PaceTable {
     this.row("Standard", 8);
     this.row("Overtime", 9);
 
+    this.table.push(
+      [
+        "Total",
+        this.format.hours(dateRange.total.worked),
+        "",
+        ""
+      ].chalkResetBold()
+    );
+
     console.log(this.table.toString());
   }
 

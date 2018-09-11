@@ -2,9 +2,7 @@
 
 const pkg = require("../package.json");
 import * as program from "commander";
-import * as Table from "cli-table";
 import { ApiService } from "./model/api.service";
-import Formatter from "./formatter";
 import "./helpers/array.helpers";
 import { StorageService } from "./model/storage.service";
 import { UpdateNotifier } from "./update-notifier";
