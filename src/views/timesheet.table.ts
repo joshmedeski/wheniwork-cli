@@ -29,26 +29,10 @@ export class TimeSheetTable {
         "",
         "",
         "Total",
-        this.format.hours(this.totalTimeSlotHours(dateRange.days))
+        this.format.hours(dateRange.total.worked)
       ].chalkResetBold()
     );
 
     console.log(this.table.toString());
-  }
-
-  /**
-   * Determines the total number of hours worked from all given time slots.
-   *
-   * @param days The days to add together.
-   * @returns total number of hours worked for all the time slots.
-   */
-  totalTimeSlotHours(days: Day[]): number {
-    let totalTimeSlotHoursWorked = 0;
-    days.forEach(day => {
-      day.slots.worked.forEach(slot => {
-        totalTimeSlotHoursWorked += slot.hours;
-      });
-    });
-    return totalTimeSlotHoursWorked;
   }
 }

@@ -25,24 +25,9 @@ export class HoursTable {
     ): number => accumulator.total.worked + currentValue.total.worked;
 
     this.table.push(
-      [
-        "Total",
-        this.format.hours(this.totalDayHours(dateRange.days))
-      ].chalkResetBold()
+      ["Total", this.format.hours(dateRange.total.worked)].chalkResetBold()
     );
 
     console.log(this.table.toString());
-  }
-
-  /**
-   * Determines the total number of hours worked from all given days.
-   *
-   * @param days The days to add together
-   * @returns total number of hours worked for all the days.
-   */
-  totalDayHours(days: Day[]): number {
-    let totalHoursWorked = 0;
-    days.forEach(day => (totalHoursWorked += day.total.worked));
-    return totalHoursWorked;
   }
 }

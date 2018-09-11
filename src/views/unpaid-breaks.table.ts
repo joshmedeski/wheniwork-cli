@@ -22,6 +22,11 @@ export class UnpaidBreaksTable {
         ]);
       });
     });
+
+    this.table.push(
+      ["", "", "Total", dateRange.total.unpaidBreaks].chalkResetBold()
+    );
+
     console.log(this.table.toString());
   }
 }
