@@ -1,7 +1,6 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
 import { DateRange } from "../dates/date-range";
-import { Day } from "../dates/day";
 import Formatter from "../formatter";
 
 export class TimeSheetTable {

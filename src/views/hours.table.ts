@@ -1,6 +1,5 @@
 import * as Table from "cli-table";
 import { DateRange } from "../dates/date-range";
-import { Day } from "../dates/day";
 import Formatter from "../formatter";
 
 export class HoursTable {
@@ -18,11 +17,6 @@ export class HoursTable {
         this.format.hours(day.total.worked)
       ]);
     });
-
-    const reduceTotalHoursWorked = (
-      accumulator: Day,
-      currentValue: Day
-    ): number => accumulator.total.worked + currentValue.total.worked;
 
     this.table.push(
       ["Total", this.format.hours(dateRange.total.worked)].chalkResetBold()
