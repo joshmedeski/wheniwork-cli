@@ -27,7 +27,7 @@ export class HoursTable {
     this.table.push(
       [
         "Total",
-        this.format.hours(this.totalHours(dateRange.days))
+        this.format.hours(this.totalDayHours(dateRange.days))
       ].chalkResetBold()
     );
 
@@ -40,7 +40,7 @@ export class HoursTable {
    * @param days The days to add together
    * @returns total number of hours worked for all the days.
    */
-  totalHours(days: Day[]): number {
+  totalDayHours(days: Day[]): number {
     let totalHoursWorked = 0;
     days.forEach(day => (totalHoursWorked += day.total.worked));
     return totalHoursWorked;
