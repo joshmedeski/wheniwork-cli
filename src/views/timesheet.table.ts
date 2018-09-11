@@ -1,6 +1,7 @@
 import * as Table from "cli-table";
 import chalk from "chalk";
 import { DateRange } from "../dates/date-range";
+import { Day } from "../dates/day";
 import Formatter from "../formatter";
 
 export class TimeSheetTable {
@@ -22,6 +23,32 @@ export class TimeSheetTable {
         ]);
       });
     });
+
+    this.table.push(
+      [
+        "",
+        "",
+        "Total",
+        this.format.hours(this.totalTimeSlotHours(dateRange.days))
+      ].chalkResetBold()
+    );
+
     console.log(this.table.toString());
+  }
+
+  /**
+   * Determines the total number of hours worked from all given time slots.
+   *
+   * @param days The days to add together.
+   * @returns total number of hours worked for all the time slots.
+   */
+  totalTimeSlotHours(days: Day[]): number {
+    let totalTimeSlotHoursWorked = 0;
+    days.forEach(day => {
+      day.slots.worked.forEach(slot => {
+        totalTimeSlotHoursWorked += slot.hours;
+      });
+    });
+    return totalTimeSlotHoursWorked;
   }
 }
