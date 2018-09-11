@@ -9,7 +9,7 @@ export class HoursTable {
 
   constructor(dateRange: DateRange) {
     this.table = new Table({
-      head: ["Day", "Hours"].chalkResetBold()
+      head: ["Day", "Worked"].chalkResetBold()
     });
 
     dateRange.days.forEach(day => {
