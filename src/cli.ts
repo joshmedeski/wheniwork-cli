@@ -16,6 +16,7 @@ import { UnpaidBreaksTable } from "./views/unpaid-breaks.table";
 program
   .name("When I Work")
   .option("-l, --login", "make a login request")
+  .option("-d, --day", "show day table")
   .option("-p, --pace", "show pace table")
   .option("-t, --timesheet", "show time sheet table")
   .option("-u, --unpaidBreaks", "show unpaid breaks table")
@@ -53,12 +54,24 @@ program
   api
     .dateRange(start, end)
     .then(dateRange => {
-      new HoursTable(dateRange); // default
+      if (
+        !program.day &&
+        !program.timesheet &&
+        !program.unpaidBreaks &&
+        !program.pace
+      ) {
+        new HoursTable(dateRange);
+        new TimeSheetTable(dateRange);
+        new UnpaidBreaksTable(dateRange);
+        new PaceTable(dateRange);
+      }
+
+      if (program.day) new HoursTable(dateRange);
       if (program.timesheet) new TimeSheetTable(dateRange);
       if (program.unpaidBreaks) new UnpaidBreaksTable(dateRange);
       if (program.pace) new PaceTable(dateRange);
     })
-    .catch(error => {
+    .catch(() => {
       console.error(
         "The date range request failed, please check your config file and try again"
       );
