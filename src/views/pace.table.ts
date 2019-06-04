@@ -4,12 +4,14 @@ import { DateRange } from "../dates/date-range";
 import Formatter from "../formatter";
 
 export class PaceTable {
+  paidTimeOff: number;
   calc = new Calculator();
   format = new Formatter();
   dateRange: DateRange;
   table: Table;
 
-  constructor(dateRange: DateRange) {
+  constructor(dateRange: DateRange, paidTimeOff: number) {
+    this.paidTimeOff = paidTimeOff;
     this.dateRange = dateRange;
     this.table = new Table({
       head: ["Pace", "Hours", "Diff", "Time"].chalkResetBold()
@@ -35,9 +37,15 @@ export class PaceTable {
     const totalTargetHours = this.dateRange.days.length * targetHours;
     this.table.push([
       `${title} (${targetHours})`,
-      `${this.dateRange.total.worked.toFixed(2)} of ${totalTargetHours}`,
+      `${this.totalWorkedWithPto(
+        this.dateRange.total.worked
+      )} of ${totalTargetHours}`,
       this.calc.difference(this.dateRange.total.worked, totalTargetHours),
       this.calc.estimateEndTime(this.dateRange.total.worked, totalTargetHours)
     ]);
+  }
+
+  private totalWorkedWithPto(totalWorked: number): string {
+    return (totalWorked + this.paidTimeOff * 8).toFixed(2);
   }
 }
