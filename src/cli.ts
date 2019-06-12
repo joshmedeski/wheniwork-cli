@@ -20,7 +20,7 @@ program
   .option("-p, --pace", "show pace table")
   .option("-t, --timesheet", "show time sheet table")
   .option("-u, --unpaidBreaks", "show unpaid breaks table")
-  .option("--pto", "paid time off")
+  .option("--pto [value]", "paid time off")
   .version(pkg.version)
   .parse(process.argv);
 
@@ -64,13 +64,13 @@ program
         new HoursTable(dateRange);
         new TimeSheetTable(dateRange);
         new UnpaidBreaksTable(dateRange);
-        new PaceTable(dateRange, program.pto || 0);
+        new PaceTable(dateRange, Number(program.pto) || 0);
       }
 
       if (program.day) new HoursTable(dateRange);
       if (program.timesheet) new TimeSheetTable(dateRange);
       if (program.unpaidBreaks) new UnpaidBreaksTable(dateRange);
-      if (program.pace) new PaceTable(dateRange, program.pto || 0);
+      if (program.pace) new PaceTable(dateRange, Number(program.pto) || 0);
     })
     .catch(() => {
       console.error(
