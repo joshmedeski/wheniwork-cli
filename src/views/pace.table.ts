@@ -10,6 +10,10 @@ export class PaceTable {
   dateRange: DateRange;
   table: Table;
 
+  get totalWorked(): number {
+    return this.dateRange.total.worked + this.paidTimeOff * 8;
+  }
+
   constructor(dateRange: DateRange, paidTimeOff: number) {
     this.paidTimeOff = paidTimeOff;
     this.dateRange = dateRange;
@@ -34,18 +38,13 @@ export class PaceTable {
   }
 
   private row(title: string, targetHours: number) {
-    const totalTargetHours = this.dateRange.days.length * targetHours;
+    const totalTargetHours =
+      (this.dateRange.days.length + this.paidTimeOff) * targetHours;
     this.table.push([
       `${title} (${targetHours})`,
-      `${this.totalWorkedWithPto(
-        this.dateRange.total.worked
-      )} of ${totalTargetHours}`,
-      this.calc.difference(this.dateRange.total.worked, totalTargetHours),
-      this.calc.estimateEndTime(this.dateRange.total.worked, totalTargetHours)
+      `${this.totalWorked.toFixed(2)} of ${totalTargetHours}`,
+      this.calc.difference(this.totalWorked, totalTargetHours),
+      this.calc.estimateEndTime(this.totalWorked, totalTargetHours)
     ]);
-  }
-
-  private totalWorkedWithPto(totalWorked: number): string {
-    return (totalWorked + this.paidTimeOff * 8).toFixed(2);
   }
 }
